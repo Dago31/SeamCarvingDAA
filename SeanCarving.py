@@ -13,7 +13,12 @@ def get(y, x, t):
     if x < 0 or x >= n: return sys.maxsize
     if y < 0 or y >= m: return sys.maxsize
     return t[y][x]
-    
+
+## Return the index of the element with less energy
+def min_index(a,b,c):
+    array=[a,b,c]
+    return sorted(array)[0][1]
+
 ## Transform the image to gray
 ## Calculate the entropy or gradient
 ## Get the path with less energy
@@ -22,13 +27,16 @@ def get(y, x, t):
 def energy(img):
     # filas = m, columnas = n
     m, n = img.shape
-        
-    ## ESTO ES LO QUE DEBE IMPLEMENTAR
-    ## ESTE SIMPLEMENTE ELIMINA LA PRIMERA COLUMNA
-    
+    ans=[]
     e = 0
-    ans = [(j,0) for j in range(m)]
-    
+    j=img[0].argmin()
+    ans.append(img[0][j])
+    e+=img[0][j]
+    for i in range(m-1):
+        j=min_index((img[i+1][j],j),(img[i+1][j+1],j+1),(img[i+1][j-1],j-1))
+        ans.append(img[i+1][j])
+        e+=img[i+1][j]
+
     return e, ans
 
 
