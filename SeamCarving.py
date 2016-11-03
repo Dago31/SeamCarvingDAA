@@ -36,7 +36,44 @@ def energy(img):
         j=min_index((img[i+1][j],j),(img[i+1][j+1],j+1),(img[i+1][j-1],j-1))
         ans.append(img[i+1][j])
         e+=img[i+1][j]
-
+ _______________________________________________________________________________________
+    camino = [range(n) for i in range(m)]
+    costo = [range(n) for i in range(m)]
+    for i in range(n):#falta por recorrer el camino inverso para armar el camino, por ahora encuentra el camino con menos energia
+    	for j i n range(m):
+    		if i == 0:
+    			camino[i][j] = 3
+    			costo[i][j] = img[i][j]
+    		elif j == 0:
+    			if costo[i-1][j]<costo[i-1][j+1]:
+    				camino[i][j] = 0
+    				costo[i][j] = costo[i-1][j]+img[i][j]
+    			else:
+    				camino[i][j] = 1
+    				costo[i][j] = costo[i-1][j+1]+img[i][j]
+    		elif j == (len(img[i])-1):
+    			if costo[i-1][j]<costo[i-1][j-1]:
+    				camino[i][j] = 0
+    				costo[i][j] = costo[i-1][j]+img[i][j]
+    			else:
+    				camino[i][j] = -1
+    				costo[i][j] = costo[i-1][j-1]+img[i][j]
+    		else:
+    			if costo[i-1][j-1]<costo[i-1][j]:
+    				camino[i][j] = -1
+    				costo[i][j] = costo[i-1][j-1]+img[i][j]
+    			elif costo[i-1][j+1]:
+    				camino[i][j] = 1
+    				costo[i][j] = costo[i-1][j+1]+img[i][j]
+    			else:
+    				camino[i][j] = 0
+    				costo[i][j] = costo[i-1][j]+img[i][j]
+   min = costo[len(costo)-1][0]
+   mi = 0
+   for i in range(len(img[0]):
+    	if costo[len(costo)-1][i]< min:
+    		min = costo[len(costo)-1][i]
+    		mi = i
     return e, ans
 
 
