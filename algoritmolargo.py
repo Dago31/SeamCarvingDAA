@@ -49,7 +49,7 @@ def energy(img):
 		camino.append(ind)
 	return camino
 def remove(image, pixels):
-    ## Debe remover el camino con menor energia
+    
     m,n,_ = image.shape
     aux=image.tolist()
     for i in range(m):
