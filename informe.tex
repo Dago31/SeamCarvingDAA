@@ -71,7 +71,7 @@
 
 
 \begin{document}
-\title{Tarea 1\\ Convex Hull}
+\title{Tarea 2\\ Seam Carving}
 
 
 \author{Dagoberto Navarrete\\Thomas Muñoz\thanks{Escuela de Informática y Telecomunicaciones}% <-this % stops a space
@@ -82,9 +82,9 @@
 {Informe}
 \maketitle
 \section{Introducción}
-
+En la tarea dos se vera como resolver el problema de rescalado de imágenes de manera horizontal, para esto primero sera necesario pasar la imagen a una matriz la cual contendrá la energía almacenada en cada píxel, y luego a través de la utilización de programación dinámica se deberá encontrar el camino que este enlazado verticalmente, una vez encontrado se borrara para quedarnos solo con los píxeles mas significativos.
 \section{Idea Principal}
-
+La idea del algoritmo es crear una matiz que contenga los costos acumulados, de manera que cada fila tome el menor valor de energía acumulada del nivel anterior, de sus filas adyacentes, por lo que inmediatamente descartara los caminos con mucha energía, finalmente cuando este en la ultima fila se tomara el dato con menor valor, el cual corresponderá  al camino de menor energía, una vez con esto, se recorrerá de manera inversa la matriz de costos y se ira restando su equivalente en la imagen, y asi se calculara el camino que contenga menor energía, el cual sera retornado una vez recorra todas las filas.
 
 \section{Código}
 
