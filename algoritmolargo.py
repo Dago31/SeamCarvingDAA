@@ -1,7 +1,7 @@
 def energy(img):
     # filas = m, columnas = n
     m, n = img.shape
-    costo = [[None] * n for i in range(m)]
+    costo = [[0] * n for i in range(m)]
     for i in range(n):
     	for j in range(m):
     		if i == 0:
@@ -11,7 +11,7 @@ def energy(img):
     				costo[i][j] = costo[i-1][j]+img[i][j]
     			else:
     				costo[i][j] = costo[i-1][j+1]+img[i][j]
-    		elif j == (len(img[i])-1):
+    		elif j == m-1:
     			if costo[i-1][j]<costo[i-1][j-1]:
     				costo[i][j] = costo[i-1][j]+img[i][j]
     			else:
@@ -23,14 +23,11 @@ def energy(img):
     				costo[i][j] = costo[i-1][j+1]+img[i][j]
     			else:
     				costo[i][j] = costo[i-1][j]+img[i][j]
-    print(costo)
-    mini = min(costo[len(costo)-1])
-    ind = costo[len(costo)-1].index(mini)
+    mini = min(costo[n-1])
+    ind = costo[n-1].index(mini)
     camino = []
-    camino.append(ind)
     rest = mini - img[n-1][ind]
-    for i in range(2,n+1):
-    	print(rest)
+    for i in range(1,n+1):
     	if ind == 0:
     		if costo[n-i][ind] == rest:
     			ind = ind
