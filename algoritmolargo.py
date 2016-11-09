@@ -6,6 +6,13 @@ import numpy as np
 import matplotlib.pyplot as plt
 import sys
 
+def sumar(arr):
+	sum = 0
+	for i in range(len(arr)):
+		sum += arr[i]
+	
+	return sum
+	
 def energy(img):
     # filas = m, columnas = n
     m, n = img.shape
@@ -14,30 +21,30 @@ def energy(img):
     for j in range(n):
         for i in range(m):
             if i == 0:
-                costo[i][j] = img[i][j]
+                costo[i][j] = sumar(img[i][j])
             elif j == 0:
                 if costo[i-1][j]<costo[i-1][j+1]:
-                    costo[i][j] = costo[i-1][j]+img[i][j]
+                    costo[i][j] = costo[i-1][j]+sumar(img[i][j])
                 else:
-                    costo[i][j] = costo[i-1][j+1]+img[i][j]
+                    costo[i][j] = costo[i-1][j+1]+sumar(img[i][j])
             elif j == (len(img[i])-1):
                 if costo[i-1][j]<costo[i-1][j-1]:
-                    costo[i][j] = costo[i-1][j]+img[i][j]
+                    costo[i][j] = costo[i-1][j]+sumar(img[i][j])
                 else:
-                    costo[i][j] = costo[i-1][j-1]+img[i][j]
+                    costo[i][j] = costo[i-1][j-1]+sumar(img[i][j])
             else:
                 if costo[i-1][j-1]<costo[i-1][j]:
-                    costo[i][j] = costo[i-1][j-1]+img[i][j]
+                    costo[i][j] = costo[i-1][j-1]+sumar(img[i][j])
                 elif costo[i-1][j+1]<costo[i-1][j]:
-                    costo[i][j] = costo[i-1][j+1]+img[i][j]
+                    costo[i][j] = costo[i-1][j+1]+sumar(img[i][j])
                 else:
-                    costo[i][j] = costo[i-1][j]+img[i][j]
+                    costo[i][j] = costo[i-1][j]+sumar(img[i][j])
 
     min_acum = min(costo[len(costo)-1])
     ind = costo[len(costo)-1].index(min_acum)
     camino = []
     camino.append(ind)
-    rest = min_acum - img[m-1][ind]
+    rest = min_acum - sumar(img[m-1][ind])
 
     for i in reversed(range(m-1)):
         if ind == 0:
@@ -52,10 +59,9 @@ def energy(img):
             elif costo[i][ind+1] == rest:
                 ind = ind+1
 
-        rest = rest - img[i][ind]
+        rest = rest - sumar(img[i][ind])
         camino.append(ind)
     return camino
-
 def remove1(image, pixels):
 
     m,n,_ = image.shape
