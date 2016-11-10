@@ -85,7 +85,7 @@
 El desafío consiste en resolver el problema de escalado de imágenes de manera horizontal, para esto primero será necesario transformar la imagen a una matriz que contenga la energía almacenada en cada píxel, y luego utilizando programación dinámica se deberá encontrar el camino con menor energía acumulada que este enlazado verticalmente, una vez encontrado se borrará, reduciendo el tamaño total de la imagen en 1 columna. Este procedimiento se repetirá x veces con  $x = columnas - (columnas*porcentaje)$.
 
 \section{Idea Principal}
-La idea principal del algoritmo es crear una matriz que contenga los costos acumulados, de manera que cada fila tome el menor valor de energía acumulada del nivel anterior, de sus filas adyacentes, por lo que inmediatamente descartará los caminos con mucha energía, finalmente cuando esté en la última fila se tomará el dato con menor valor, el cual corresponderá  al camino de menor energía, una vez con esto, se recorrerá de manera inversa la matriz de costos y se irá restando su equivalente en la imagen, y así se calculará el camino a borrar en la imagen, el cual sera retornado una vez recorra todas las columnas. %cambie filas por columnas revisar
+La idea principal del algoritmo es crear una matriz que contenga los costos acumulados, de manera que cada columna tome el menor valor de energía acumulada de la fila anterior, de sus columnas adyacentes, por lo que inmediatamente descartará los caminos con mucha energía, finalmente cuando esté en la última fila se tomará el dato con menor valor, el cual corresponderá  al camino de menor energía, una vez con esto, se recorrerá de manera inversa la matriz de costos y se irá restando su equivalente en la imagen, así se calculará el camino a borrar en la imagen, el cual sera retornado una vez recorra todas las filas. %cambie filas por columnas revisar
 
 \section{Código}
 
@@ -119,29 +119,19 @@ La idea principal del algoritmo es crear una matriz que contenga los costos acum
 
 
 \section{Análisis del tiempo de ejecución y espacio}
-$T(n)$ representa el tiempo de ejecución del algoritmo.\\\\
-$T(n)=$ \left\{ \begin{array}{lcc}
-             1 & si & n=1\\
-             \\ 2T(n/2) + O(n) &  si & n>1 \\
-             \end{array}
-   \right\\\\
+$T(N*M)$ representa el tiempo de ejecución del algoritmo.\\\\
 
-$T(N)=2T(N/2)+N$ \textit{Dividiendo por N}\\
-$T(N)/N=2T(N/2)/N+1$\\
-$    =T(N/2)/(N/2)+1$\\
-$    =T(N/4)/(N/4)+1+1$\\
-$    =T(N/8)/(N/8)+1+1+1$\\
-$...$\\
-$    =T(N/N)/(N/N)+1+1+...+1$\\
-$    =\log N$\\
-$T(N)= N\log N$\\
+$T(N*M)= T(N*M)+N$ \\
+$      = N*M+N$\\
+$      = O(N*M)$\\
+
 \begin{itemize}
-\item El espacio utilizado se mantiene constante en el algoritmo: $N$.
+\item El espacio utilizado se mantiene constante en el algoritmo: $N*M$.
 \end{itemize} 
 \section{Discusión}
-
+Nuestro algoritmo resuelve el problema en orden lineal, pero esto lo hace sacrificando memoria para llevar a cabo esto, ya que crea una matriz de igual tamaño para resolver el problema, y va trabajando sobre esto, esto lo hace ya que estamos trabajando con la técnica de programación dinámica, ya que vamos descartando los caminos que se sobreponen con mayor costo de energía hasta ese nivel. También nuestro algoritmo tiene cierto rango de escalabilidad efectiva, ya que una vez superado ese rango se comienza a distorsionar la imagen, ese rango es 50\%.
 \section{Comentarios}
-
+Para la realización de nuestro algoritmo utilizamos diversas librerías de pyhton para el trabajo de imágenes en el software, tales como numpy. scipy, skimage, las cuales contenían funciones que eran de eran ayuda para la resolución del problema de escalabilidad.También se aprendió el manejo de imágenes con python, y de como estas pueden ser modificadas a través de software, es decir se puede trabajar todo el aspecto de la imagen, modificar colores, aumentar reducir tamaños, etc.
 \section{Referencias}
 \textit {Introduction to algorithms}, Cormen, Leiserson, Rivest, \& Stein tercera edición.
 % references section
