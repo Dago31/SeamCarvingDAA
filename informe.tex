@@ -88,7 +88,10 @@ El desafío consiste en resolver el problema de escalado de imágenes de manera 
 La idea principal del algoritmo es crear una matriz que contenga los costos acumulados, de manera que cada columna tome el menor valor de energía acumulada de la fila anterior, de sus columnas adyacentes, por lo que inmediatamente descartará los caminos con mucha energía, finalmente cuando esté en la última fila se tomará el dato con menor valor, el cual corresponderá  al camino de menor energía, una vez con esto, se recorrerá de manera inversa la matriz de costos y se irá restando su equivalente en la imagen, así se calculará el camino a borrar en la imagen, el cual sera retornado una vez recorra todas las filas. %cambie filas por columnas revisar
 
 \section{Código}
-
+Nuestro algoritmo consta de dos funciones:
+energy: Esta función es la encargada de encontrar el camino de menor energía, para esto creara una matriz de igual tamaño de la imagen, en la cual ira guardando el costo acumulado del camino hasta determinado punto (i,j), para esto se compra con los puntos adyacentes a este en la matriz de costos, es decir (i-1,j), (i-1,j+1), (i-1,j-1), y se quedara con el que tenga menor costo y lo sumara con el valor de energía del píxel correspondiente, realizara esto para cada píxel de la imagen.\\
+Una vez con la matriz costos llena se tomara la ultima fila de esta y se encontrara el valor mínimo, el cual corresponderá al camino de mínima energía, con este camino se calcula su índice y se inserta en la lista camino, con esto hecho se calcula el resto que va a ser el costo del valor mínimo, menos su píxel correspondiente en la imagen. Luego se recorren todas las filas de la matriz de abajo hacia arriba y se van restando con sus correspondientes píxeles, después  se compran con el costo acumulado y el resto, cuando sean iguales , se inserta el índice correspondiente al numero de columna en la lista camino, una vez recorridas todas las filas de costos se retorna la lista camino.\\
+remove1: Esta función es encargada de eliminar el camino con menor energía, para esto tomara el camino otorgado por energía, y recorrerá las filas de la imagen desde abajo hacia arriba, eliminando el píxel correspondiente ubicado en la columna que le indique la lista camino, para eso tomará el valor del píxel y utilizara la función remove con dicho valor.
 
 \lstset{
   language=Python,
