@@ -128,6 +128,10 @@ $      = O(N*M)$\\
 \begin{itemize}
 \item El espacio utilizado se mantiene constante en el algoritmo: $N*M$.
 \end{itemize} 
+
+\section{Experimentación}
+Para comprobar el tiempo de ejecución del algoritmo, su comportamiento con todo tamaño de imagen y relacionar el cambio con respecto a la imagen original (si es que se empieza a notar distorsión en esta o si es que se pierde alguna parte reelevante de la imagen). Se ingresarán imágenes de 0.5, 1, 2, 4, 8 y 16 megapíxeles y se reducirá el tamaño (en el eje horizontal) en un 90, 80, 75 y 50 por ciento.
+
 \section{Discusión}
 Nuestro algoritmo resuelve el problema en orden lineal, pero esto lo hace sacrificando memoria para llevar a cabo esto, ya que crea una matriz de igual tamaño para resolver el problema, y va trabajando sobre esto, esto lo hace ya que estamos trabajando con la técnica de programación dinámica, ya que vamos descartando los caminos que se sobreponen con mayor costo de energía hasta ese nivel. También nuestro algoritmo tiene cierto rango de escalabilidad efectiva, ya que una vez superado ese rango se comienza a distorsionar la imagen, ese rango es 50\%.
 \section{Comentarios}
