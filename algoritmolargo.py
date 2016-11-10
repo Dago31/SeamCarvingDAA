@@ -9,10 +9,10 @@ import sys
 def energy(img):
     # filas = m, columnas = n
     m, n = img.shape
-    costo = [[0] * n for i in range(m)]
+    costo = [[0 for _ in range(n)] for _ in range(m)]
 
-    for j in range(n):
-        for i in range(m):
+    for i in range(m):
+        for j in range(n):
             if i == 0:
                 costo[i][j] = img[i][j]
             elif j == 0:
@@ -35,6 +35,7 @@ def energy(img):
 
     min_acum = min(costo[len(costo)-1])
     ind = costo[len(costo)-1].index(min_acum)
+
     camino = []
     camino.append(ind)
     rest = min_acum - img[m-1][ind]
@@ -56,14 +57,25 @@ def energy(img):
         camino.append(ind)
     return camino
 
-def remove1(image, pixels):
-
+# def remove1(image, pixels):
+#
+#     m,n,_ = image.shape
+#     aux=image.tolist()
+#     for i in range(n):
+#         value = img[m-1-i][pixels[i]]
+#         img[m-1-i].remove(value)
+#     # print(img)
+#
+def remove(image, pixels):
+    ## Debe remover el camino con menor energia
     m,n,_ = image.shape
     aux=image.tolist()
-    for i in range(n):
-        value = img[m-1-i][pixels[i]]
-        img[m-1-i].remove(value)
-    # print(img)
+    for i in range(m):
+        del aux[m-(i+1)][pixels[i]]
+
+    ans = np.asarray(aux,dtype='uint8')
+
+    return ans
 
 def togray(image):
     image_bw = rgb2gray(image)
@@ -89,18 +101,19 @@ if __name__=='__main__':
     percent = 0.75
 
     m,n,_ = image.shape
+    print(m,n)
     new_n = int(n * percent)
     img = image
     img_gray = togray(img)
-    array=np.array([[3,2,5,7],[4,1,3,10],[7,8,9,1]])
+    # array=np.array([[3,2,5,7],[4,1,3,10],[7,8,9,1]])
     p=energy(img_gray)
-    print(p)
+    # print(p)
     # print(img)
     # for i in range(n-new_n):
     #     print("Iteracion numero {}/{}".format(i+1, n-new_n))
     #     img_gray = togray(img)
     #     p = energy(img_gray)
-    #     img_new = remove1(img, p)
+    #     img_new = remove(img, p)
     #     img = img_new
     #
     # plt.figure()
